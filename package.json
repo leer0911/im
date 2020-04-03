@@ -5,7 +5,8 @@
   "description": "im demo create by react",
   "scripts": {
     "commit": "git-cz",
-    "lint": "eslint . --ext .ts,.tsx"
+    "lint": "eslint . --ext .ts,.tsx",
+    "ui": "cd packages/component && yarn storybook"
   },
   "workspaces": [
     "packages/*"
