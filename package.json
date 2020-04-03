@@ -6,7 +6,8 @@
   "scripts": {
     "commit": "git-cz",
     "lint": "eslint . --ext .ts,.tsx",
-    "ui": "cd packages/component && yarn storybook"
+    "ui": "cd packages/component && yarn storybook",
+    "app": "cd packages/app && yarn start"
   },
   "workspaces": [
     "packages/*"
