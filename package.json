@@ -1,0 +1,48 @@
+{
+  "private": true,
+  "name": "im",
+  "version": "0.1.0",
+  "description": "im demo create by react",
+  "scripts": {
+    "commit": "git-cz",
+    "lint": "eslint . --ext .ts,.tsx"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "author": "lee <445220716@qq.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/leer0911/im.git"
+  },
+  "license": "ISC",
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "@commitlint/prompt": "^8.3.5",
+    "@types/node": "^13.7.6",
+    "@types/react": "^16.9.23",
+    "@typescript-eslint/eslint-plugin": "^2.21.0",
+    "@typescript-eslint/parser": "^2.21.0",
+    "commitizen": "^4.0.3",
+    "cz-conventional-changelog": "^3.1.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-react": "^7.18.3",
+    "eslint-plugin-react-hooks": "^2.5.0",
+    "husky": "^4.2.3",
+    "lerna": "^3.20.2",
+    "lint-staged": "^10.0.8",
+    "prettier": "^1.19.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "dependencies": {
+    "react": "^16.13.0",
+    "react-dom": "^16.13.0",
+    "typescript": "^3.8.2"
+  }
+}
