@@ -12,6 +12,7 @@ Project Description
 
 ### Done ✓
 
+- [x] Storybook notes、viewport 支持  
 - [x] 组件库新增 Storybook 文档支持  
 - [x] 通过 Create react app 快速搭建组件库  
 - [x] 通过自研脚手架快速生成 monorepo 项目  
