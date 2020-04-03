@@ -9,9 +9,11 @@ Project Description
 
 ### In Progress
 
+- [ ] 实现聊天室基础 UI  
 
 ### Done ✓
 
+- [x] 通过 Create react app 快速搭建 demo  
 - [x] Storybook notes、viewport 支持  
 - [x] 组件库新增 Storybook 文档支持  
 - [x] 通过 Create react app 快速搭建组件库  
