@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { AppBar, Toolbar, Typography, IconButton, useScrollTrigger } from '@material-ui/core';
+import { AppBar, Toolbar, Typography, IconButton } from '@material-ui/core';
 import { ArrowBackIos, MoreHoriz } from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
@@ -15,20 +15,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function Header() {
+interface Props {
+  elevation: number;
+}
+
+export default function ContainerHeader(props: Props) {
+  const { elevation } = props;
   const classes = useStyles();
   const [title] = React.useState('聊天室');
 
-  const trigger = useScrollTrigger({
-    disableHysteresis: true,
-    threshold: 0,
-    target: window,
-  });
-
-  const elevation = trigger ? 4 : 0;
-
   return (
-    <AppBar elevation={elevation}>
+    <AppBar elevation={elevation} position="static">
       <Toolbar>
         <IconButton edge="start" className={classes.backButton} color="inherit" aria-label="back">
           <ArrowBackIos />
@@ -43,5 +40,3 @@ export default function Header() {
     </AppBar>
   );
 }
-
-Header.displayName = 'ContainerHeader';
