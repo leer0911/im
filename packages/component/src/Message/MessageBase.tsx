@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Avatar, Typography } from '@material-ui/core';
+import { Box, Avatar, Typography } from '../';
 
 export interface Props {
   reverse?: boolean;

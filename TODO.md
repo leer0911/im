@@ -10,10 +10,11 @@ Project Description
 
 ### In Progress
 
-- [ ] 消息流组件开发  
+- [ ] 新增 Socket 功能  
 
 ### Done ✓
 
+- [x] 消息流组件开发  
 - [x] 实现聊天室基础 UI 布局  
 - [x] 新增顶部通栏 UI  
 - [x] 通过 Create react app 快速搭建 demo  

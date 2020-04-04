@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
-import { Box } from '@material-ui/core';
+import { Box } from '../';
 import MessageBase, { Props } from './MessageBase';
 
 const useStyles = makeStyles(theme => ({
