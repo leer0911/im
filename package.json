@@ -12,6 +12,11 @@
   "workspaces": [
     "packages/*"
   ],
+  "nohoist": [
+    "**/webpack-dev-server",
+    "**/babel-loader",
+    "**/babel-jest"
+  ],
   "author": "lee <445220716@qq.com>",
   "repository": {
     "type": "git",

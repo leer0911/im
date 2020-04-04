@@ -1,6 +1,5 @@
 import React from 'react';
-import { makeStyles, useTheme, fade } from '@material-ui/core/styles';
-import { AppBar, Toolbar, IconButton, Box, InputBase } from '@material-ui/core';
+import { AppBar, Toolbar, IconButton, Box, InputBase, makeStyles, useTheme, fade } from '@im/component';
 import { InsertEmoticon, ControlPoint, Mic } from '@material-ui/icons';
 
 const useStyles = makeStyles(() => ({

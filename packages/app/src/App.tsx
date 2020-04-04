@@ -1,5 +1,5 @@
 import React from 'react';
-import { CssBaseline, Box, useScrollTrigger } from '@material-ui/core';
+import { CssBaseline, Box, useScrollTrigger } from '@im/component';
 import { Header, Tool, Message } from './container';
 
 export default function App() {
