@@ -7,7 +7,8 @@
     "commit": "git-cz",
     "lint": "eslint . --ext .ts,.tsx",
     "ui": "cd packages/component && yarn storybook",
-    "app": "cd packages/app && yarn start"
+    "app": "cd packages/app && yarn start",
+    "server": "cd packages/server && yarn dev"
   },
   "workspaces": [
     "packages/*"
