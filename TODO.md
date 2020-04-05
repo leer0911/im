@@ -10,10 +10,11 @@ Project Description
 
 ### In Progress
 
-- [ ] 新增聊天功能  
+- [ ] 新增表情功能  
 
 ### Done ✓
 
+- [x] 新增聊天功能  
 - [x] 新增 Socket 功能  
 - [x] 消息流组件开发  
 - [x] 实现聊天室基础 UI 布局  

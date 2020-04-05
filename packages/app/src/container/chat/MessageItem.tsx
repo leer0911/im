@@ -7,8 +7,9 @@ interface Props {
     type: string;
     content?: any;
     avatar?: string;
-    name?: string;
+    username?: string;
     userId?: string;
+    isUser: boolean;
   };
 }
 
@@ -22,7 +23,7 @@ const renders = {
     render(props: any) {
       return (
         <MessageMedia {...props.commonProps}>
-          <img src={props.content.image} />
+          <img src={props.content.image} alt="" />
         </MessageMedia>
       );
     },
@@ -35,9 +36,9 @@ const renders = {
 };
 
 export default function ContainerMessageItem(props: Props) {
-  const { type, userId, avatar, name, ...restProps } = props.data;
+  const { type, avatar, isUser, username, ...restProps } = props.data;
   // 假设没有 userId 表示为系统消息
-  const commonProps = userId ? { reverse: userId === '2', avatar, name } : {};
+  const commonProps = username ? { reverse: isUser, avatar, name: username } : {};
 
   if (!renders[type]) {
     return null;

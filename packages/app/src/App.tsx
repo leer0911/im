@@ -11,6 +11,7 @@ export default function App() {
   const [username, setUsername] = React.useState('');
   const [socket, setSocket] = React.useState<any>();
   const [messages, setMessages] = React.useState<any>([]);
+  const connectedRef = React.useRef(false);
 
   const handleClose = () => {
     setOpen(false);
@@ -27,10 +28,29 @@ export default function App() {
     setUsername(e.target.value);
   };
 
-  React.useEffect(() => {
-    const socket: any = io('http://localhost:3000');
-    setSocket(socket);
+  const handleSend = (message: string) => {
+    setMessages([
+      ...messages,
+      {
+        id: messages.length,
+        username,
+        isUser: true,
+        type: MESSAGE_TYPE.TEXT_SIMPLE,
+        content: { text: message },
+      },
+    ]);
+  };
 
+  React.useEffect(() => {
+    const socket: any = io('http://localhost:3002');
+    setSocket(socket);
+  }, []);
+
+  React.useEffect(() => {
+    if (!socket) {
+      return;
+    }
+    
     socket.on('user joined', (data: any) => {
       setMessages([
         ...messages,
@@ -41,7 +61,32 @@ export default function App() {
         },
       ]);
     });
-  }, []);
+
+    socket.on('new message', (data: any) => {
+      setMessages([
+        ...messages,
+        {
+          id: messages.length,
+          username,
+          type: MESSAGE_TYPE.TEXT_SIMPLE,
+          content: { text: data.message },
+        },
+      ]);
+    });
+
+    socket.on('user left', (data: any) => {
+      setMessages([
+        ...messages,
+        {
+          id: messages.length,
+          type: MESSAGE_TYPE.SYSTEM_TEXT_SIMPLE,
+          content: { text: `${data.username} 离开了聊天室` },
+        },
+      ]);
+    });
+
+    connectedRef.current = true;
+  }, [socket, messages, username]);
 
   const trigger = useScrollTrigger({
     disableHysteresis: true,
@@ -57,11 +102,12 @@ export default function App() {
       <CssBaseline />
       <Header elevation={elevation} />
       <Message ref={messageBoxRef} messages={messages} />
-      <Tool />
+      <Tool socket={socket} onSend={handleSend} />
+
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">聊天室</DialogTitle>
         <DialogContent>
-          <DialogContentText>欢迎来到聊天室，请输入你在本聊天室的昵称！</DialogContentText>
+          <DialogContentText>欢迎来到聊天室，请输入您的昵称！</DialogContentText>
           <TextField
             value={username}
             onChange={handleUsername}

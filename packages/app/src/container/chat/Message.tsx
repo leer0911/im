@@ -10,7 +10,6 @@ function ContainerMessage(props: Props, ref: any) {
   const { messages = [] } = props;
   const theme = useTheme();
 
-  console.log('===============================================>messages', messages);
   return (
     <RootRef rootRef={ref}>
       <Box flexGrow={1} overflow="auto" p={2} bgcolor={theme.palette.background.default}>
