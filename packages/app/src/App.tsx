@@ -13,10 +13,6 @@ export default function App() {
   const [messages, setMessages] = React.useState<any>([]);
   const connectedRef = React.useRef(false);
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
   const handleOk = () => {
     if (username && socket) {
       socket.emit('add user', username);
@@ -50,7 +46,7 @@ export default function App() {
     if (!socket) {
       return;
     }
-    
+
     socket.on('user joined', (data: any) => {
       setMessages([
         ...messages,
@@ -104,10 +100,10 @@ export default function App() {
       <Message ref={messageBoxRef} messages={messages} />
       <Tool socket={socket} onSend={handleSend} />
 
-      <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">聊天室</DialogTitle>
+      <Dialog open={open} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">FE 聊天室</DialogTitle>
         <DialogContent>
-          <DialogContentText>欢迎来到聊天室，请输入您的昵称！</DialogContentText>
+          <DialogContentText>欢迎来到 FE 聊天室，在这可以畅聊前端想法！</DialogContentText>
           <TextField
             value={username}
             onChange={handleUsername}

@@ -10,10 +10,11 @@ Project Description
 
 ### In Progress
 
-- [ ] 新增表情功能  
+- [ ] 添加全局 Store  
 
 ### Done ✓
 
+- [x] 新增表情功能  
 - [x] 新增聊天功能  
 - [x] 新增 Socket 功能  
 - [x] 消息流组件开发  
