@@ -1,6 +1,6 @@
 # IM
 
-聊天室 Demo
+聊天室 Demo，[教程](./docs/tutorial.md)
 
 ## 特性
 

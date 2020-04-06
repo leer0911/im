@@ -12,10 +12,11 @@
 
 ### In Progress
 
-- [ ] Code Review ，添加必要注释  
 
 ### Done ✓
 
+- [x] 聊天室教程编写  
+- [x] Code Review ，添加必要注释  
 - [x] 文档优化  
 - [x] 体验优化  
 - [x] 添加全局 Store  
