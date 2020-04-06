@@ -19,7 +19,7 @@ export default function Emoji(props: Props) {
       <Box overflow="auto" height={200} bgcolor={theme.palette.background.default} p={2}>
         <Grid container spacing={1}>
           {emojis.map(emoji => (
-            <Grid item xs={2} spacing={4} justify="center" onClick={handleClickEmoji(emoji.native)}>
+            <Grid key={emoji.id} item xs={2} onClick={handleClickEmoji(emoji.native)}>
               <Box fontSize={24} textAlign="center">
                 {emoji.native}
               </Box>

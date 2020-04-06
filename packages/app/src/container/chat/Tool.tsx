@@ -1,8 +1,10 @@
 import React from 'react';
 import { AppBar, Toolbar, IconButton, Box, Button, InputBase, makeStyles, useTheme, fade } from '@im/component';
 import { InsertEmoticon, ControlPoint, Mic } from '@material-ui/icons';
+import { MESSAGE_TYPE } from '@im/helper';
 import Emoji from './Emoji';
 import Extra from './Extra';
+import { useChatStore, Type, ActiveTool } from './store';
 
 const useStyles = makeStyles(() => ({
   inputRoot: {
@@ -11,40 +13,39 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-interface Props {
-  socket: any;
-  onSend: (message: string) => void;
-}
-
-export default function ContainerTool(props: Props) {
-  const { socket, onSend } = props;
+function ContainerTool() {
   const classes = useStyles();
   const theme = useTheme();
+  const { state, dispatch } = useChatStore();
 
-  const [emojiVisible, setEmojiVisible] = React.useState(false);
-  const [extraVisible, setExtraVisible] = React.useState(false);
   const [message, setMessage] = React.useState('');
-
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
   };
 
   const handleSend = () => {
-    if (socket) {
-      socket.emit('new message', message);
-      onSend(message);
+    if (state.socket) {
+      state.socket.emit('new message', { message, type: MESSAGE_TYPE.TEXT_SIMPLE });
+      dispatch({
+        type: Type.INSERT_MESSAGE,
+        payload: {
+          id: `message-${state.messages.length}`,
+          userId: state.currentUserId,
+          isOwner: true,
+          type: MESSAGE_TYPE.TEXT_SIMPLE,
+          content: { text: message },
+        },
+      });
       setMessage('');
     }
   };
 
   const handleOpenEmoji = () => {
-    setExtraVisible(false);
-    setEmojiVisible(true);
+    dispatch({ type: Type.UPDATE_ACTIVE_TOOL, payload: ActiveTool.EMOJI });
   };
 
   const handleOpenTool = () => {
-    setEmojiVisible(false);
-    setExtraVisible(true);
+    dispatch({ type: Type.UPDATE_ACTIVE_TOOL, payload: ActiveTool.EXTRA });
   };
 
   const handleSelectEmoji = (emoji: string) => {
@@ -69,7 +70,7 @@ export default function ContainerTool(props: Props) {
   };
 
   return (
-    <>
+    <Box flexShrink={0}>
       <AppBar position="static" component="footer" elevation={1}>
         <Toolbar>
           <Box flexGrow={1} display="flex" alignItems="flex-end">
@@ -102,8 +103,10 @@ export default function ContainerTool(props: Props) {
           </Box>
         </Toolbar>
       </AppBar>
-      <Emoji visible={emojiVisible} onSelect={handleSelectEmoji} />
-      <Extra visible={extraVisible} />
-    </>
+      <Emoji visible={state.activeTool === ActiveTool.EMOJI} onSelect={handleSelectEmoji} />
+      <Extra visible={state.activeTool === ActiveTool.EXTRA} />
+    </Box>
   );
 }
+
+export default ContainerTool;

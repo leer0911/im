@@ -1,16 +1,11 @@
 import React from 'react';
 import { MESSAGE_TYPE } from '@im/helper';
 import { MessageText, MessageMedia, MessageSystem } from '@im/component';
+import { Message } from './store';
+import { useChatStore } from './store';
 
 interface Props {
-  data: {
-    type: string;
-    content?: any;
-    avatar?: string;
-    username?: string;
-    userId?: string;
-    isUser: boolean;
-  };
+  data: Message;
 }
 
 const renders = {
@@ -36,9 +31,10 @@ const renders = {
 };
 
 export default function ContainerMessageItem(props: Props) {
-  const { type, avatar, isUser, username, ...restProps } = props.data;
-  // 假设没有 userId 表示为系统消息
-  const commonProps = username ? { reverse: isUser, avatar, name: username } : {};
+  const { state } = useChatStore();
+  const { type, userId = '', isOwner, ...restProps } = props.data;
+  const { avatar = '', name = '' } = state.members[userId] || {};
+  const commonProps = { reverse: isOwner, name, avatar };
 
   if (!renders[type]) {
     return null;

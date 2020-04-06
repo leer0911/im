@@ -1,5 +1,6 @@
 import express from 'express';
 import socket from 'socket.io';
+import { v4 } from 'uuid';
 
 const app = express();
 const server = require('http').createServer(app);
@@ -20,9 +21,11 @@ io.on('connection', (socket: any) => {
   socket.on('new message', (data: any) => {
     // we tell the client to execute 'new message'
     socket.broadcast.emit('new message', {
+      id: v4(),
       username: socket.username,
-      id: numUsers,
-      message: data,
+      userId: socket.userId,
+      message: data.message,
+      type: data.type,
     });
   });
 
@@ -33,15 +36,21 @@ io.on('connection', (socket: any) => {
 
     // we store the username in the socket session for this client
     socket.username = username;
+    socket.userId = v4();
     ++numUsers;
     addedUser = true;
-    socket.broadcast.emit('login', {
+
+    socket.emit('login', {
+      username: socket.username,
+      userId: socket.userId,
       numUsers: numUsers,
     });
 
     // echo globally (all clients) that a person has connected
     socket.broadcast.emit('user joined', {
+      id: v4(),
       username: socket.username,
+      userId: socket.userId,
       numUsers: numUsers,
     });
   });
@@ -53,7 +62,9 @@ io.on('connection', (socket: any) => {
 
       // echo globally that this client has left
       socket.broadcast.emit('user left', {
+        id: v4(),
         username: socket.username,
+        userId: socket.userId,
         numUsers: numUsers,
       });
     }
