@@ -1,3 +1,8 @@
+/**
+ * @ Author: Lee
+ * @ Description: 消息基础组件
+ */
+
 import React from 'react';
 import { Box, Avatar, Typography } from '../';
 
@@ -8,12 +13,13 @@ export interface Props {
   children?: React.ReactNode;
 }
 
-export default function MessageText(props: Props) {
+export default function MessageBase(props: Props) {
   const { reverse = false, avatar = '', name = '', children } = props;
 
   const [avatarWidth, setAvatarWidth] = React.useState();
   const avatarRef = React.useRef(null);
 
+  // 通过 flex 反向显示来区分聊天室中的当前用户和其他用户
   React.useEffect(() => {
     const avatarEl: any = avatarRef.current;
     if (avatarEl) {

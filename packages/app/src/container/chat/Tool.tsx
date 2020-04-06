@@ -1,3 +1,8 @@
+/**
+ * @ Author: Lee
+ * @ Description: 底部工具栏，如发送语音，文本，标签等
+ */
+
 import React from 'react';
 import { AppBar, Toolbar, IconButton, Box, Button, InputBase, makeStyles, useTheme, fade } from '@im/component';
 import { InsertEmoticon, ControlPoint, Mic } from '@material-ui/icons';
@@ -18,6 +23,7 @@ function ContainerTool() {
   const theme = useTheme();
   const { state, dispatch } = useChatStore();
 
+  // 准备发送的消息
   const [message, setMessage] = React.useState('');
   const handleMessageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setMessage(e.target.value);
@@ -26,6 +32,8 @@ function ContainerTool() {
   const handleSend = () => {
     if (state.socket) {
       state.socket.emit('new message', { message, type: MESSAGE_TYPE.TEXT_SIMPLE });
+
+      // 当前用户的消息直接存入消息列表
       dispatch({
         type: Type.INSERT_MESSAGE,
         payload: {
@@ -40,23 +48,28 @@ function ContainerTool() {
     }
   };
 
+  // 输入框聚焦时还原工具栏最初状态
   const handleMessageInputFocus = () => {
     dispatch({ type: Type.UPDATE_ACTIVE_TOOL, payload: ActiveTool.NULL });
   };
 
+  // 打开表情栏
   const handleOpenEmoji = () => {
     dispatch({ type: Type.UPDATE_ACTIVE_TOOL, payload: ActiveTool.EMOJI });
   };
 
+  // 打开扩展工具
   const handleOpenTool = () => {
     dispatch({ type: Type.UPDATE_ACTIVE_TOOL, payload: ActiveTool.EXTRA });
   };
 
+  // 拼接表情到准备发送的消息
   const handleSelectEmoji = (emoji: string) => {
     setMessage(`${message} ${emoji}`);
   };
 
   const renderSend = () => {
+    // 输入框中有文本时显示发送按钮
     if (message.trim().length !== 0) {
       return (
         <Box pl={1} my={1}>

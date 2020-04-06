@@ -1,3 +1,8 @@
+/**
+ * @ Author: Lee
+ * @ Description: 消息媒体组件
+ */
+
 import React from 'react';
 import { useTheme, makeStyles } from '@material-ui/core/styles';
 import { Box } from '../';
@@ -14,7 +19,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MessageText(props: Props) {
+export default function MessageMedia(props: Props) {
   const { reverse = false, avatar = '', name = '', children } = props;
   const theme = useTheme();
   const classes = useStyles();

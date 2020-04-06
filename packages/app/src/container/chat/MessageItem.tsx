@@ -1,13 +1,18 @@
+/**
+ * @ Author: Lee
+ * @ Description: 消息渲染组件，根据消息类型渲染不同组件
+ */
+
 import React from 'react';
 import { MESSAGE_TYPE } from '@im/helper';
 import { MessageText, MessageMedia, MessageSystem } from '@im/component';
-import { Message } from './store';
-import { useChatStore } from './store';
+import { Message, useChatStore } from './store';
 
 interface Props {
   data: Message;
 }
 
+// 消息 render 方法，用于分派不同 props
 const renders = {
   [MESSAGE_TYPE.TEXT_SIMPLE]: {
     render(props: any) {
@@ -34,7 +39,7 @@ export default function ContainerMessageItem(props: Props) {
   const { state } = useChatStore();
   const { type, userId = '', isOwner, ...restProps } = props.data;
   const { avatar = '', name = '' } = state.members[userId] || {};
-  const commonProps = { reverse: isOwner, name, avatar };
+  const commonProps = { reverse: isOwner, name, avatar }; // 消息组件公共 props
 
   if (!renders[type]) {
     return null;

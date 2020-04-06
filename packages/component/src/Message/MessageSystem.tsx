@@ -1,3 +1,8 @@
+/**
+ * @ Author: Lee
+ * @ Description: 文本系统消息
+ */
+
 import React from 'react';
 import { Box, Typography } from '../';
 

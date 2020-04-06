@@ -1,6 +1,12 @@
+/**
+ * @ Author: Lee
+ * @ Description: 聊天室状态管理
+ */
+
 import React from 'react';
 import { MESSAGE_TYPE } from '@im/helper';
 
+// 消息模型
 export interface Message {
   id: string;
   type: MESSAGE_TYPE;
@@ -12,6 +18,7 @@ export interface Message {
   };
 }
 
+// 用户模型
 export interface Member {
   id: string;
   name?: string;
@@ -27,16 +34,18 @@ export enum Type {
   UPDATE_CURRENT_USER_ID,
 }
 
+// 工具栏模式，如表情模式
 export enum ActiveTool {
   EMOJI,
   EXTRA,
   NULL,
 }
 
+// 聊天室共享状态
 interface State {
-  socket: SocketIOClient.Socket | null;
-  messages: Message[];
-  members: { [propName: string]: Member };
+  socket: SocketIOClient.Socket | null; // 当前连接的 socket
+  messages: Message[]; // 消息列表，包括用户发送的文本消息、系统消息
+  members: { [propName: string]: Member }; // 聊天室用户列表，范式化
   activeTool: ActiveTool;
   currentUserId: string;
 }

@@ -1,3 +1,8 @@
+/**
+ * @ Author: Lee
+ * @ Description: 工具扩展，如相册
+ */
+
 import React from 'react';
 import ImageIcon from '@material-ui/icons/Image';
 import { Collapse, Box, Grid, Typography, useTheme } from '@im/component';

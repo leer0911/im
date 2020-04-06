@@ -1,3 +1,8 @@
+/**
+ * @ Author: Lee
+ * @ Description: 消息列表展示
+ */
+
 import React from 'react';
 import { Box, RootRef, useTheme } from '@im/component';
 import MessageItem from './MessageItem';
@@ -9,10 +14,10 @@ interface Props {
 }
 
 function ContainerMessage(props: Props, ref: any) {
-  const { messages = [], onClick } = props;
   const theme = useTheme();
-  const [lastMessage, setLastMessage] = React.useState<HTMLElement | undefined>(undefined);
+  const { messages = [], onClick } = props;
 
+  const [lastMessage, setLastMessage] = React.useState<HTMLElement | undefined>(undefined);
   const messageBoxRef = (index: number) => {
     return (node: HTMLElement | null) => {
       if (messages.length - 1 === index && node) {
@@ -23,6 +28,7 @@ function ContainerMessage(props: Props, ref: any) {
     };
   };
 
+  // 获取最后一个消息，并将滚动到可视区域
   React.useEffect(() => {
     if (lastMessage) {
       lastMessage.scrollIntoView();

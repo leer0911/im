@@ -1,3 +1,8 @@
+/**
+ * @ Author: Lee
+ * @ Description: 聊天室简易服务端代码
+ */
+
 import express from 'express';
 import socket from 'socket.io';
 import { v4 } from 'uuid';
@@ -11,15 +16,16 @@ server.listen(port, () => {
   console.log('Server listening at port %d', port);
 });
 
+// 聊天室用户数量
 let numUsers = 0;
 
+// 监听连接
 io.on('connection', (socket: any) => {
-  console.log('===============================================>connection');
   let addedUser = false;
 
-  // when the client emits 'new message', this listens and executes
+  // 处理接收的新消息
   socket.on('new message', (data: any) => {
-    // we tell the client to execute 'new message'
+    // 通知其他客户端
     socket.broadcast.emit('new message', {
       id: v4(),
       username: socket.username,
@@ -29,24 +35,25 @@ io.on('connection', (socket: any) => {
     });
   });
 
-  // when the client emits 'add user', this listens and executes
+  // 处理新加入聊天室的用户
   socket.on('add user', (username: any) => {
     if (addedUser) return;
-    console.log('===============================================>username', username);
 
-    // we store the username in the socket session for this client
+    // 在 socket 回话中保存用户名称、Id 等
     socket.username = username;
     socket.userId = v4();
+
     ++numUsers;
     addedUser = true;
 
+    // 通知当前客户端登录信息
     socket.emit('login', {
       username: socket.username,
       userId: socket.userId,
       numUsers: numUsers,
     });
 
-    // echo globally (all clients) that a person has connected
+    // 通知所有客户端，新用户加入聊天室
     socket.broadcast.emit('user joined', {
       id: v4(),
       username: socket.username,
@@ -55,12 +62,12 @@ io.on('connection', (socket: any) => {
     });
   });
 
-  // when the user disconnects.. perform this
+  // 处理断开链接
   socket.on('disconnect', () => {
     if (addedUser) {
       --numUsers;
 
-      // echo globally that this client has left
+      // 告知其他客户端某个用户已离开
       socket.broadcast.emit('user left', {
         id: v4(),
         username: socket.username,
