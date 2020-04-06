@@ -25,7 +25,7 @@ export default function MessageText(props: Props) {
   return (
     <Box display="flex" flexDirection={reverse ? 'row-reverse' : 'row'}>
       <Avatar ref={avatarRef} variant="rounded" src={avatar} />
-      <Box display="flex" flexDirection="column" overflow="hidden" mx={1}>
+      <Box display="flex" flexDirection="column" mx={1}>
         {!reverse && (
           <Typography variant="caption" color="textSecondary">
             {name}

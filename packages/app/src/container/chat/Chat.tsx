@@ -8,11 +8,7 @@ import Tool from './Tool';
 import Message from './Message';
 import { ChatProvider, initialState, reducer, useChatStore, Type, ActiveTool } from './store';
 
-const avatars = [
-  'https://avatars1.githubusercontent.com/u/8563549?s=460&u=75197e8024390078914ece72fd6218e6346bd0ef&v=4',
-  'https://avatars2.githubusercontent.com/u/3192087?s=460&v=4',
-  'https://material-ui.com/static/logo_raw.svg',
-];
+const avatars = [...new Array(7)].map((_, index) => `https://material-ui.com/static/images/avatar/${index + 1}.jpg`);
 
 interface WsMessage {
   id: string;

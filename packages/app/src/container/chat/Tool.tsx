@@ -40,6 +40,10 @@ function ContainerTool() {
     }
   };
 
+  const handleMessageInputFocus = () => {
+    dispatch({ type: Type.UPDATE_ACTIVE_TOOL, payload: ActiveTool.NULL });
+  };
+
   const handleOpenEmoji = () => {
     dispatch({ type: Type.UPDATE_ACTIVE_TOOL, payload: ActiveTool.EMOJI });
   };
@@ -87,11 +91,12 @@ function ContainerTool() {
               <InputBase
                 value={message}
                 onChange={handleMessageChange}
+                onFocus={handleMessageInputFocus}
                 rowsMax={5}
                 classes={{
                   root: classes.inputRoot,
                 }}
-                inputProps={{ 'aria-label': 'search' }}
+                inputProps={{ 'aria-label': 'message input' }}
                 fullWidth
                 multiline
               />
