@@ -10,10 +10,11 @@ Project Description
 
 ### In Progress
 
-- [ ] 体验优化  
 
 ### Done ✓
 
+- [x] 文档优化  
+- [x] 体验优化  
 - [x] 添加全局 Store  
 - [x] 新增表情功能  
 - [x] 新增聊天功能  
