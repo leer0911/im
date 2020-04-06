@@ -1,15 +1,18 @@
-# Project Name
+# 聊天室
 
-Project Description
+聊天室客户端、服务端、组件库开发清单
 
 ### Todo
 
 - [ ] 组件库打包命令优化  
 - [ ] 抽离 TS 通用配置  
 - [ ] 新增顶部聊天室名称获取逻辑  
+- [ ] 表情兼容性处理  
+- [ ] TS 类型公共维护  
 
 ### In Progress
 
+- [ ] Code Review ，添加必要注释  
 
 ### Done ✓
 

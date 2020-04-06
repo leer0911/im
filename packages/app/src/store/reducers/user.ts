@@ -1,3 +1,8 @@
+/**
+ * @ Author: Lee
+ * @ Description: 用户信息状态管理
+ */
+
 import { RESTORE } from './constants';
 
 export type userAction = {

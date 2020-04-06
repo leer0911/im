@@ -1,3 +1,8 @@
+/**
+ * @ Author: Lee
+ * @ Description: 表情组件
+ */
+
 import React from 'react';
 import { Collapse, Box, Grid, useTheme } from '@im/component';
 import emojis from './emojis';
